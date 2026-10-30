@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2997ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5ac8fa;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="url(#waterGrad)"/>
+  
+  <!-- DNA helix stylized waves -->
+  <g fill="none" stroke="white" stroke-width="3" stroke-linecap="round">
+    <!-- Top wave -->
+    <path d="M20 35 Q35 25, 50 35 T80 35" opacity="0.9"/>
+    <!-- Middle wave -->
+    <path d="M20 50 Q35 40, 50 50 T80 50" opacity="0.7"/>
+    <!-- Bottom wave -->
+    <path d="M20 65 Q35 55, 50 65 T80 65" opacity="0.5"/>
+  </g>
+  
+  <!-- Fish silhouette -->
+  <ellipse cx="50" cy="50" rx="12" ry="6" fill="white" opacity="0.9"/>
+  <polygon points="62,50 70,44 70,56" fill="white" opacity="0.9"/>
+  <circle cx="43" cy="49" r="2" fill="url(#waterGrad)"/>
+</svg>
