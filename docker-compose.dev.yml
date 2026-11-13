@@ -1,0 +1,65 @@
+# ============================================
+# Species Atlas - Docker Compose (开发环境)
+# 只启动 MySQL，后端和前端本地开发
+# 数据保存在当前目录的 .data 文件夹中
+# ============================================
+
+version: '3.8'
+
+services:
+  # ==========================================
+  # MySQL 数据库（开发环境）
+  # ==========================================
+  mysql:
+    image: mysql:8.0
+    container_name: species-atlas-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: species_atlas
+      MYSQL_USER: species
+      MYSQL_PASSWORD: species123
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      # 开发环境数据库数据保存到当前目录（与生产环境分离）
+      - ./.data/mysql-dev:/var/lib/mysql
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d:ro
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - species-network-dev
+
+  # ==========================================
+  # phpMyAdmin（可选，数据库管理工具）
+  # ==========================================
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: species-atlas-phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8888:80"
+    networks:
+      - species-network-dev
+
+# 不再使用 Docker volumes，数据直接保存到本地目录
+
+networks:
+  species-network-dev:
+    name: species-atlas-network-dev
+    driver: bridge

@@ -1,0 +1,108 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: species-atlas-server
+  
+  profiles:
+    active: dev
+  
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:species_atlas}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: SpeciesAtlasHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  
+  # JPA 配置
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  
+  # Flyway 数据库迁移
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
+    validate-on-migrate: true
+  
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+  
+  # JSON 配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+# JWT 配置
+jwt:
+  # 重要：生产环境必须通过环境变量 JWT_SECRET 设置至少64字符的密钥
+  secret: ${JWT_SECRET:CHANGE_ME_BEFORE_PRODUCTION_THIS_IS_NOT_A_VALID_SECRET_KEY_64CHARS}
+  expiration: 7200000       # Access Token 过期时间：2小时（毫秒）
+  refresh-expiration: 604800000  # Refresh Token 过期时间：7天（毫秒）
+  header: Authorization
+  prefix: "Bearer "
+
+# 文件上传配置
+file:
+  upload:
+    path: ${FILE_UPLOAD_PATH:./uploads}
+    allowed-types: jpg,jpeg,png,gif,webp
+    max-size: 10485760  # 10MB
+
+# API 文档配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  info:
+    title: 物种图谱 API
+    description: 水生生物数据管理平台 API 文档
+    version: 1.0.0
+    contact:
+      name: Species Atlas Team
+      email: support@species-atlas.com
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.species.atlas: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  file:
+    name: logs/species-atlas.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

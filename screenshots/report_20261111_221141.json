@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-11-11T22:11:21.081738",
+  "tests": [
+    {
+      "name": "API - 底栖动物",
+      "status": "PASS",
+      "count": 304
+    },
+    {
+      "name": "API - 水生植物",
+      "status": "PASS",
+      "count": 190
+    },
+    {
+      "name": "API - 浮游植物",
+      "status": "PASS",
+      "count": 254
+    },
+    {
+      "name": "API - 浮游动物",
+      "status": "PASS",
+      "count": 42
+    },
+    {
+      "name": "API - 鱼类",
+      "status": "PASS",
+      "count": 237
+    },
+    {
+      "name": "首页加载",
+      "status": "PASS",
+      "url": "http://localhost:3000/",
+      "screenshot": "d:\\env\\project\\species-atlas\\screenshots\\01_homepage_20261111_221127.png"
+    },
+    {
+      "name": "图片加载检查",
+      "status": "PASS",
+      "broken_count": 0
+    }
+  ],
+  "broken_images": [],
+  "summary": {
+    "api_total": 1027,
+    "total_tests": 7,
+    "passed": 7,
+    "failed": 0,
+    "warned": 0,
+    "broken_images_count": 0
+  }
+}

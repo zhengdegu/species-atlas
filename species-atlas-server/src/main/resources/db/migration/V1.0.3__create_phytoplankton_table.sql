@@ -1,0 +1,25 @@
+-- 浮游植物表
+CREATE TABLE IF NOT EXISTS phytoplankton (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键ID',
+    serial_number VARCHAR(50) COMMENT '序号',
+    species_code VARCHAR(100) NOT NULL COMMENT '物种编码',
+    chinese_name VARCHAR(200) NOT NULL COMMENT '中文名',
+    latin_name VARCHAR(200) COMMENT '拉丁名',
+    photo_code VARCHAR(100) COMMENT '照片编码',
+    photo_paths JSON COMMENT '照片路径列表',
+    taxonomic_status VARCHAR(500) COMMENT '分类地位',
+    gene_name VARCHAR(200) COMMENT '基因名称',
+    dna_sequence_code VARCHAR(100) COMMENT 'DNA序列编码',
+    dna_coding_property TEXT COMMENT 'DNA编码属性',
+    morphological_description TEXT COMMENT '形态描述',
+    reference TEXT COMMENT '参考文献',
+    geographical_distribution TEXT COMMENT '地理分布',
+    create_by BIGINT COMMENT '创建人ID',
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    update_by BIGINT COMMENT '更新人ID',
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    deleted TINYINT(1) DEFAULT 0 COMMENT '是否删除',
+    INDEX idx_pp_chinese_name (chinese_name),
+    INDEX idx_pp_species_code (species_code),
+    INDEX idx_pp_latin_name (latin_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='浮游植物表';

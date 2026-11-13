@@ -1,0 +1,32 @@
+# Maven 构建产物（由 Docker 构建）
+# 使用 Dockerfile.local 时需要 target 目录
+# target/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# 日志
+*.log
+logs/
+
+# 本地配置
+application-local.yml
+.env
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# 文档
+*.md
+docs/
+
+# 测试报告
+test-output/
+surefire-reports/

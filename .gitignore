@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Docker 鏈湴鏁版嵁鐩綍锛堟暟鎹簱銆佷笂浼犳枃浠躲€佹棩蹇楋級
+.data/
+
+# 鐜鍙橀噺鏂囦欢
+.env
+.env.local
+.env.*.local
+
+# graph data
+/图谱数据/
+/species-atlas-web/public/species/
