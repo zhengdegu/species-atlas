@@ -1,0 +1,8 @@
+﻿$env:DB_HOST = "localhost"
+$env:DB_PORT = "3306"
+$env:DB_NAME = "species_atlas"
+$env:DB_USERNAME = "root"
+$env:DB_PASSWORD = "root123456"
+$env:JWT_SECRET = "SpeciesAtlas2024ProductionJWTSecretKey64CharsMinimumRequiredForHS512AlgorithmSecurity"
+$env:SPRING_PROFILES_ACTIVE = "prod"
+java -jar "D:\env\project\species-atlas\species-atlas-server\target\species-atlas-server-1.0.0.jar"
